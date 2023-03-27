@@ -1,6 +1,6 @@
 here will be my projects from AI python, please dont use them 😾
 ｗｈａｔ ／ｉｓ／ｗｉｌｌ  ｂｅ／ ｈｅｒｅ：
--> face recognition(doing it rn)
+-> face recognition(DONE)
 ->smile recognition(will do)
 ->recognition of things using tensorflow(will do)
 ->gender checking(will do)
