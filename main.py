@@ -1,29 +1,21 @@
-import cv2
-from random import randrange
-facedata = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-# classifier -> detector
-img = cv2.imread('face.jpg')
-# basically you take a file trac,k and read it through; IMPORTING IMG INTO OPENCV
-grayimg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-#makes img on grayscale bc it better works to capture it
-facecord = facedata.detectMultiScale(grayimg)
-#detects face, small/big and more than one or only one
-print(facecord)
-# shows coordinates of rectangle that will be around the face (left up corner, bottom right corner cords)
-for (x, y, w, h) in facecord:
-    # bercause facecord is a list, this loop will let us go through each detected face
-    #sets x, y, w, h from facecord
-    cv2.rectangle(img, (x, y), (x + w, y + h), (randrange(256), randrange(256),  randrange(256)), 2)
-#draws rectangle up left cord(x + y), lower right vord(x + w, y + h); ( randrange(256), ...) refers to color; 3 to thickness,
-#rememebr that the color is bgr that means that the frist attribute is standing for GREEN not red\
-#where w = width, and h = height
-cv2.imshow('Detector of faces :0', img)
-# what we will see in the popped up window. title and the image
-cv2.waitKey()
-# the window will not shut down on itself, only when you press any key/ click the 'X'
-print("code done")
-
-
-
-
-
+import os
+import datetime
+with open("number.txt", "r") as f:
+    current_number = float(f.readline())
+money = float(input("What is the amount of money that you are trying to save?: "))
+operation = input(f"The current number is {current_number}. Do you want to add or subtract? (Enter + or -): ")
+amount = float(input(f"How much do you want to {operation}? "))
+if operation == "+":
+    current_number += amount
+else:
+    current_number -= amount
+diff = money - current_number
+timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+with open("log.txt", "a") as f:
+    f.write(f"{timestamp}: {operation} {amount}\n")
+with open("number.txt", "w") as f:
+    f.write(str(current_number))
+last_modified = os.path.getmtime("number.txt")
+last_modified_str = datetime.datetime.fromtimestamp(last_modified).strftime("%Y-%m-%d %H:%M:%S")
+print(f"The new number is {current_number}. You need {diff} more to reach {money}.")
+print(f"The file was last modified on {last_modified_str}.")
